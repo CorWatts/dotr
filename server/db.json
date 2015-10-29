@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "parent": null,
+    "type": "category",
+    "value": "clothing"
+  },
+  {
+    "id": 2,
+    "parent": null,
+    "type": "category",
+    "value": "edibles"
+  },
+  {
+    "id": 3,
+    "parent": null,
+    "type": "category",
+    "value": "activities"
+  },
+  {
+    "id": 4,
+    "parent": 1,
+    "type": "subcategory",
+    "value": "dresses"
+  },
+  {
+    "id": 5,
+    "parent": 1,
+    "type": "subcategory",
+    "value": "shoes"
+  },
+  {
+    "id": 6,
+    "parent": 4,
+    "type": "item",
+    "value": {
+      "name": "blackhalo",
+      "desc": "This is the best dress"
+    }
+  },
+  {
+    "id": 7,
+    "parent": 1,
+    "type": "subcategory",
+    "value": "hats"
+  }
+]

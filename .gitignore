@@ -1,0 +1,8 @@
+server/node_modules
+
+client/node_modules
+client/bower_components
+client/sftp-config.json
+client/_build
+client/npm-debug.log
+client/.idea
