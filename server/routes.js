@@ -8,10 +8,10 @@ var subcategoryController = require("./controllers/subcategory");
 var helpers  = require('./lib/helpers');
 var itemController = require("./controllers/item");
 
-//server.get(/^\/(?!api).*/, restify.serveStatic({
-//    directory: __dirname + '/../client',
-//      default: "index.html"
-//}));
+server.get(/^\/(?!api).*/, restify.serveStatic({
+    directory: __dirname + '/../client/app',
+      default: "index.html"
+}));
 
 namespace(server, '/api', function () {
   // category actions
