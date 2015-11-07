@@ -1,0 +1,17 @@
+<h2 class="md-title inset">Categories</h2>
+<div class='md-padding' layout="row" layout-wrap ng-controller="CategoryCtrl">
+  <md-card ng-repeat="category in categories">
+    <img src="//i.imgur.com/PtlR97G.gif" class="md-card-image" alt="image caption" ng-click="console.log('click')">
+    <md-card-content ng-click="loadSubcategories(category.id, category.name)">
+      <h2>{{category.value}}</h2>
+    </md-card-content>
+    <md-divider></md-divider>
+    <div class="md-actions" layout="row" layout-align="center">
+      <md-button class="md-primary">Edit</md-button>
+      <md-button class="md-warn">Delete</md-button>
+    </div>
+  </md-card>
+</div>
+</div>
+</div>
+

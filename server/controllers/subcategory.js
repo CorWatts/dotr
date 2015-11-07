@@ -9,7 +9,15 @@ var db   = config.db;
 var file = config.file;
 
 exports.list = function(req, res, next) {
-  subcategories = _.where(db, {type: "subcategory"});
+  criteria = {};
+  if(_.has(req.params, "parent"))
+    criteria.parent =  parseInt(req.params.parent);
+
+  criteria = _.merge(criteria, {type: "subcategory"});
+
+  console.log(criteria);
+
+  subcategories = _.where(db, criteria);
 
   res.send(200, {
     "status": "success",

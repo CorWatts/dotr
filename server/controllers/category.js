@@ -29,6 +29,19 @@ exports.get = function(req, res, next) {
   });
 }
 
+exports.sub = function(req, res, next) {
+  id = parseInt(req.params.id);
+
+  subcategories = _.find(db, {type: "subcategory", parent: id});
+  if(subcategories === undefined)
+    errors.does_not_exist(res, "category");
+
+  res.send(200, {
+    "status": "success",
+    "data": subcategories
+  });
+}
+
 exports.post = function(req, res, next) {
   value = req.body.value;
 
