@@ -5,6 +5,7 @@
   "private": true,
   "main": "server.js",
   "dependencies": {
+    "google-images": "^0.1.4",
     "jsonfile": "^2.2.3",
     "lodash": "^3.10.1",
     "restify": "^4.0.3",
