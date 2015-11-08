@@ -17,6 +17,7 @@ namespace(server, '/api', function () {
   // category actions
   server.get('/categories', categoryController.list);
   server.get('/category/:id', categoryController.get);
+  server.put('/category/:id', categoryController.put);
   server.get('/category/:id/sub', categoryController.sub);
   server.post('/category', categoryController.post);
   server.del('/category/:id', categoryController.destroy);

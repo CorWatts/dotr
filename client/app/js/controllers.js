@@ -64,6 +64,40 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
     });
   };
 
+  $scope.showEdit = function(ev, categories, id, value) {
+    $mdDialog.show({
+      controller: function ($scope, $http, $mdDialog, id, value) {
+        $scope.formData = {id: id, value: value};
+        $scope.hide = function() {
+          $mdDialog.hide();
+        };
+        $scope.cancel = function(ev2) {
+          ev2.preventDefault();
+          $mdDialog.cancel();
+        };
+        $scope.answer = function(answer) {
+          $mdDialog.hide(answer);
+        };
+
+        $scope.update = function() {
+          $http.put('api/category/' + id , $scope.formData).then(function(response) {
+            var arr_id = _.findIndex(categories, function(category) {
+              return category.id == id});
+            categories[arr_id] = {id: id, value: $scope.formData.value};
+            $mdDialog.hide();
+          });
+        };
+      },
+      locals: {id: id, value: value},
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit($scope)" name="add"> <h2>Edit a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button ng-click="update()" class="md-primary"> Update </md-button> </div></md-dialog>',
+      targetEvent: ev
+    }) .then(function(answer) {
+      $scope.alert = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.alert = 'You cancelled the dialog.';
+    });
+  };
+
   $scope.showDelete = function(ev, categories, id) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id) {

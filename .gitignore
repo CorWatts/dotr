@@ -6,3 +6,5 @@ client/sftp-config.json
 client/_build
 client/npm-debug.log
 client/.idea
+
+server/db.json

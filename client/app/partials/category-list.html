@@ -13,7 +13,7 @@
       </md-card-content>
       <md-divider></md-divider>
       <div class="md-actions" layout="row" layout-align="center">
-        <md-button class="md-primary">Edit</md-button>
+        <md-button class="md-primary" ng-click="showEdit($event, categories, category.id, category.value)">Edit</md-button>
         <md-button class="md-warn" ng-click="showDelete($event, categories, category.id)">Delete</md-button>
       </div>
     </md-card>

@@ -72,6 +72,38 @@ exports.post = function(req, res, next) {
   }});
 }
 
+exports.put = function(req, res, next) {
+  value = req.body.value;
+  id = req.body.id;
+
+  var arr_id = _.findIndex(db, function(category) {
+    return category.id == id}
+  );
+
+  if(arr_id === undefined)
+    errors.does_not_exist(res, "category");
+
+  imagesearch.search(value, {size: "small", callback: function (err, images) {
+    json = {
+      "id": id,
+      "parent": null,
+      "type": "category",
+      "value": value,
+      "image_url": images[0].url
+    }
+
+    db[arr_id] = json;
+
+    jsonfile.writeFileSync(file, db, {spaces: 2});
+
+    // Send back the value they posted
+    res.send(200, {
+      "status": "success",
+      "data": json
+    });
+  }});
+}
+
 exports.destroy = function(req, res, next) {
   id = parseInt(req.params.id);
 
