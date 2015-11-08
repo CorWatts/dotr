@@ -1,22 +1,21 @@
-<span>
-  <h2 class="md-title inset">Categories</h2>
-  <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event)">
-    <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
-  </md-button>
-</span>
-<div class='md-padding' layout="row" layout-wrap ng-controller="CategoryCtrl">
-  <md-card ng-repeat="category in categories">
-    <img src="//i.imgur.com/PtlR97G.gif" class="md-card-image" alt="image caption" ng-click="console.log('click')">
-    <md-card-content ng-click="loadSubcategories(category.id, category.name)">
-      <h2>{{category.value}}</h2>
-    </md-card-content>
-    <md-divider></md-divider>
-    <div class="md-actions" layout="row" layout-align="center">
-      <md-button class="md-primary">Edit</md-button>
-      <md-button class="md-warn">Delete</md-button>
-    </div>
-  </md-card>
+<div ng-controller="CategoryCtrl">
+  <span>
+    <h2 class="md-title inset">Categories</h2>
+    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event)">
+      <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+  </span>
+  <div class='md-padding' layout="row" layout-wrap>
+    <md-card ng-repeat="category in categories">
+      <img src="//i.imgur.com/PtlR97G.gif" class="md-card-image" alt="image caption" ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
+      <md-card-content ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
+        <h2>{{category.value}}</h2>
+      </md-card-content>
+      <md-divider></md-divider>
+      <div class="md-actions" layout="row" layout-align="center">
+        <md-button class="md-primary">Edit</md-button>
+        <md-button class="md-warn">Delete</md-button>
+      </div>
+    </md-card>
+  </div>
 </div>
-</div>
-</div>
-

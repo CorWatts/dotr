@@ -10,8 +10,14 @@ var file = config.file;
 
 exports.list = function(req, res, next) {
   criteria = {};
-  if(_.has(req.params, "parent"))
-    criteria.parent =  parseInt(req.params.parent);
+  if(_.has(req.params, "parent_id"))
+    criteria.parent =  parseInt(req.params.parent_id);
+
+  if(_.has(req.params, "parent_name")) {
+    parent_name =  req.params.parent_name;
+    if(!_.has(criteria, "parent"))
+      criteria.parent = helpers.get_id(db, "category", parent_name);
+  }
 
   criteria = _.merge(criteria, {type: "subcategory"});
 

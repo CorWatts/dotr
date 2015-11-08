@@ -1,5 +1,4 @@
-app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdDialog', function($scope, $mdBottomSheet, $mdDialog){
-
+var AppCtrl = function($scope, $mdBottomSheet, $mdDialog){
 	// Toolbar search toggle
 	$scope.toggleSearch = function(element) {
 		$scope.showSearch = !$scope.showSearch;
@@ -18,22 +17,9 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdDialog', function($sc
 			$scope.alert = clickedItem.name + ' clicked!';
 		});
 	};
+};
 
-	$scope.showAdd = function(ev) {
-		$mdDialog.show({
-			controller: DialogController,
-    template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="user.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
-			targetEvent: ev,
-		})
-		.then(function(answer) {
-			$scope.alert = 'You said the information was "' + answer + '".';
-		}, function() {
-			$scope.alert = 'You cancelled the dialog.';
-		});
-	};
-}]);
-
-app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
+var ListBottomSheetCtrl = function($scope, $mdBottomSheet) {
 	$scope.items = [
 	{ name: 'Share', icon: 'social:ic_share_24px' },
 	{ name: 'Upload', icon: 'file:ic_cloud_upload_24px' },
@@ -45,7 +31,30 @@ app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
 		var clickedItem = $scope.items[$index];
 		$mdBottomSheet.hide(clickedItem);
 	};
-});
+};
+
+var CategoryCtrl = function ($scope, $http, $mdDialog) {
+  $scope.showAdd = function(ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="user.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
+      targetEvent: ev,
+    })
+    .then(function(answer) {
+      $scope.alert = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.alert = 'You cancelled the dialog.';
+    });
+  };
+
+  $scope.getCategoryList = function($scope, $http) {
+    $http.get('api/categories').then(function(response) {
+      $scope.categories = response.data.data;
+    });
+  };
+
+  $scope.getCategoryList($scope, $http);
+};
 
 function DialogController($scope, $mdDialog) {
 	$scope.hide = function() {
@@ -59,54 +68,9 @@ function DialogController($scope, $mdDialog) {
 	};
 };
 
-app.controller('CategoryCtrl', ['$scope', '$http',
-  function ($scope, $http) {
-	
-    $http.get('api/categories').then(function(response) {
-      $scope.categories = response.data.data;
-    });
-  }]);
+//var SubcategoryCtrl = function ($scope, $http) {};
 
-app.controller('DemoCtrl', DemoCtrl);
-function DemoCtrl ($timeout, $q) {
-	var self = this;
-	// list of `state` value/display objects
-	self.states        = loadAll();
-	self.selectedItem  = null;
-	self.searchText    = null;
-	self.querySearch   = querySearch;
-	// ******************************
-	// Internal methods
-	// ******************************
-	/**
-	 * Search for states... use $timeout to simulate
-	 * remote dataservice call.
-	 */
-	function querySearch (query) {
-		var results = query ? self.states.filter( createFilterFor(query) ) : [];
-		return results;
-	}
-	/**
-	 * Build `states` list of key/value pairs
-	 */
-	function loadAll() {
-		var allStates = 'Ali Conners, Alex, Scott, Jennifer, \
-										Sandra Adams, Brian Holt, \
-										Trevor Hansen';
-		return allStates.split(/, +/g).map( function (state) {
-			return {
-				value: state.toLowerCase(),
-				display: state
-			};
-		});
-	}
-	/**
-	 * Create filter function for a query string
-	 */
-	function createFilterFor(query) {
-		var lowercaseQuery = angular.lowercase(query);
-		return function filterFn(state) {
-			return (state.value.indexOf(lowercaseQuery) === 0);
-		};
-	}
-};
+app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdDialog', AppCtrl]);
+app.controller('ListBottomSheetCtrl', ['$scope', '$mdBottomSheet', ListBottomSheetCtrl]);
+app.controller('CategoryCtrl', ['$scope', '$http', '$mdDialog', CategoryCtrl]);
+//app.controller('SubcategoryCtrl', ['$scope', '$http', SubcategoryCtrl]);

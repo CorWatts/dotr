@@ -3,6 +3,11 @@ var _        = require('lodash');
 var errors   = require('../lib/errors');
 var jsonfile = require('jsonfile');
 
+var get_id = function(db, level, value) {
+  obj = _.findWhere(db, {type: level, value: value});
+  return obj.id;
+}
+
 var get_new_id = function(db) {
   max = _.max(db, "id");
   this_id = max.id;
@@ -39,6 +44,7 @@ var delete_from_id = function(db, file, id) {
 };
 
 module.exports = {
+  get_id: get_id,
   get_new_id: get_new_id,
   delete_id: delete_id,
   delete_from_id: delete_from_id
