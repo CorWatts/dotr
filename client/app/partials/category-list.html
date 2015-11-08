@@ -7,10 +7,12 @@
   </span>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="category in categories">
-      <img ng-src="{{category.image_url}}" class="md-card-image" alt="image caption" ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
-      <md-card-content ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
-        <h2>{{category.value}}</h2>
-      </md-card-content>
+      <a href="#/{{category.value}}">
+        <img ng-src="{{category.image_url}}" class="md-card-image" alt="image caption" ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
+        <md-card-content ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
+          <h2>{{category.value}}</h2>
+        </md-card-content>
+      </a>
       <md-divider></md-divider>
       <div class="md-actions" layout="row" layout-align="center">
         <md-button class="md-primary" ng-click="showEdit($event, categories, category.id, category.value)">Edit</md-button>

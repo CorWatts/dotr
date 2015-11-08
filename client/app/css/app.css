@@ -62,6 +62,11 @@ md-card img.md-card-image {
   max-width: 500px;
 }
 
+md-card a {
+  text-decoration: none;
+  color: inherit;
+}
+
 ng-md-icon > svg {
 	display: block;
 	margin: 0px auto 0px auto;
