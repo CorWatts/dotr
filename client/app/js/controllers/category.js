@@ -20,7 +20,7 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
           });
         };
       },
-      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add" ng-submit="submit($event)"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary" type="submit"> Save </md-button> </div> </form> </md-dialog>',
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add" ng-submit="submit()"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary" type="submit"> Save </md-button> </div> </form> </md-dialog>',
       targetEvent: ev
     }) .then(function(answer) {
       $scope.alert = 'You said the information was "' + answer + '".';

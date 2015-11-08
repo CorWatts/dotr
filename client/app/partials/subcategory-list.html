@@ -1,7 +1,7 @@
 <div ng-controller="SubcategoryCtrl">
   <span>
-    <h2 class="md-title inset">Subcategories</h2>
-    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, subcategories)">
+    <h2 class="md-title inset">Subcategories in {{categoryName}} </h2>
+    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, subcategories, categoryId)">
       <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
   </span>

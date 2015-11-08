@@ -21,17 +21,18 @@ namespace(server, '/api', function () {
   server.get('/category/:id/sub', categoryController.sub);
   server.post('/category', categoryController.post);
   server.del('/category/:id', categoryController.destroy);
-
+  
   //// subcategory actions
   server.get('/subcategories', subcategoryController.list);
   server.get('/subcategory/:id', subcategoryController.get);
-  server.post('/subcategory/:category', subcategoryController.post);
-  server.del('/subcategory', subcategoryController.destroy);
+  server.put('/subcategory/:id', subcategoryController.put);
+  server.post('/subcategory/:categoryId', subcategoryController.post);
+  server.del('/subcategory/:id', subcategoryController.destroy);
 
   // item actions
   server.get('/items', itemController.list);
   server.get('/item/:id', itemController.get);
   server.post('/item/:subcategory', itemController.post);
-  server.del('/item', itemController.destroy);
+  server.del('/item/:id', itemController.destroy);
 });
 
