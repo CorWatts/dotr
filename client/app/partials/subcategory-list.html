@@ -1,23 +1,23 @@
-<h2 class="md-title inset">Subcategories</h2>
-<md-card>
-  <md-list>
-    <md-list-item class="md-3-line" ng-repeat="item in activity | filter:search | orderBy:'-what'">
-      <md-icon class="md-avatar" hide-sm md-svg-icon="avatars:{{item.avatar}}"></md-icon>
-      <div class="md-list-item-text">
-        <h3>{{item.what}}</h3>
-        <h4>{{item.who}}</h4>
-        <p>{{item.notes}}</p>
+<div ng-controller="SubcategoryCtrl">
+  <span>
+    <h2 class="md-title inset">Subcategories</h2>
+    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, subcategories)">
+      <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+  </span>
+  <div class='md-padding' layout="row" layout-wrap>
+    <md-card ng-repeat="subcategory in subcategories">
+      <a href="#/{{subcategory.value}}">
+        <img ng-src="{{subcategory.image_url}}" class="md-card-image" alt="image caption">
+        <md-card-content>
+          <h2>{{subcategory.value}}</h2>
+        </md-card-content>
+      </a>
+      <md-divider></md-divider>
+      <div class="md-actions" layout="row" layout-align="center">
+        <md-button class="md-primary" ng-click="showEdit($event, subcategories, subcategory.id, subcategory.value)">Edit</md-button>
+        <md-button class="md-warn" ng-click="showDelete($event, subcategories, subcategory.id)">Delete</md-button>
       </div>
-      <md-divider md-inset hide-sm ng-if="!$last"></md-divider>
-      <md-divider hide-gt-sm ng-if="!$last"></md-divider>
-    </md-list-item>
-    <md-divider></md-divider>
-    <md-list-item>
-      <md-button class="md-primary">
-        <ng-md-icon icon="arrow_forward" style="fill: white"></ng-md-icon>
-        <span>More</span>
-      </md-button>
-    </md-list-item>
-  </md-list>
-</md-card>
-
+    </md-card>
+  </div>
+</div>
