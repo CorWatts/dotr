@@ -1,18 +1,23 @@
 var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
+
+  var categoryControllerMethods = function() {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function(ev2) {
+      ev2.preventDefault();
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
   $scope.showAdd = function(ev, categories) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog) {
+        categoryControllerMethods.call(this)
         $scope.formData = {};
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function(ev2) {
-          ev2.preventDefault();
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
         $scope.submit = function() {
           $http.post('api/category', $scope.formData).then(function(response) {
             categories.push(response.data.data);
@@ -32,18 +37,8 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
   $scope.showEdit = function(ev, categories, id, value) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id, value) {
+        categoryControllerMethods.call(this)
         $scope.formData = {id: id, value: value};
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function(ev2) {
-          ev2.preventDefault();
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
-
         $scope.update = function() {
           $http.put('api/category/' + id , $scope.formData).then(function(response) {
             var arr_id = _.findIndex(categories, function(category) {
@@ -66,16 +61,8 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
   $scope.showDelete = function(ev, categories, id) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id) {
+        categoryControllerMethods.call(this)
         $scope.formData = {};
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function() {
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
         $scope.delete = function() {
           $http.delete('api/category/'+id).then(function(response) {
             var arr_id = _.findIndex(categories, function(category) {
