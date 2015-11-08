@@ -66,7 +66,7 @@ app.controller('AppCtrl', ['$scope', '$mdBottomSheet', '$mdDialog', function($sc
 	$scope.showAdd = function(ev) {
 		$mdDialog.show({
 			controller: DialogController,
-			template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="userForm"> <div layout layout-sm="column"> <md-input-container flex> <label>First Name</label> <input ng-model="user.firstName"> </md-input-container> <md-input-container flex> <label>Last Name</label> <input ng-model="user.lastName"> </md-input-container> </div> <md-input-container flex> <label>Message</label> <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
+    template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="user.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
 			targetEvent: ev,
 		})
 		.then(function(answer) {

@@ -20,6 +20,10 @@ html, body {
   width: 36px;
 }
 
+span h2 {
+  display: inline;
+}
+
 .md-toolbar-tools > h3 {
   color: white;
 }
