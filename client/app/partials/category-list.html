@@ -7,7 +7,7 @@
   </span>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="category in categories">
-      <img height="240" width="240" src="{{category.image_url}}" class="md-card-image" alt="image caption" ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
+      <img ng-src="{{category.image_url}}" class="md-card-image" alt="image caption" ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
       <md-card-content ng-click="SubcategoryCtrl.loadSubcategories(category.name)">
         <h2>{{category.value}}</h2>
       </md-card-content>
