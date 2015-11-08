@@ -1,4 +1,5 @@
-var app = angular.module('dotrApp', ['ngMaterial', 'ngMdIcons', 'ngRoute']);
+var app = angular.module('dotrApp', ['ngMaterial', 'ngMdIcons', 'ngRoute'])
+  .constant('_', window._);
 
 app.config(function($mdThemingProvider) {
   var customBlueMap = 		$mdThemingProvider.extendPalette('light-blue', {
