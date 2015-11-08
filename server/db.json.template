@@ -21,10 +21,31 @@
     "image_url": "http://ep.yimg.com/ay/entirelypets/nylabone-healthy-edibles-resealable-pouch-bacon-flavored-6-regular-11-21-oz-35.jpg"
   },
   {
-    "id": 4,
+    "id": 5,
     "parent": null,
     "type": "category",
+    "value": "clothing",
+    "image_url": "http://2.bp.blogspot.com/-CYGzasO3kNM/TYFuJamxMqI/AAAAAAAABDY/zAhZRs_AfR0/s1600/clothing%252B1.jpg"
+  },
+  {
+    "id": 6,
+    "parent": 5,
+    "type": "subcategory",
     "value": "dresses",
-    "image_url": "http://4.bp.blogspot.com/-4uvkrQfa-RY/U9Ve_bC_UQI/AAAAAAAAD5s/0QS__Kabd28/s1600/baad9b46789b4d771430fb60664cf6db.jpeg"
+    "image_url": "http://2.bp.blogspot.com/-CYGzasO3kNM/TYFuJamxMqI/AAAAAAAABDY/zAhZRs_AfR0/s1600/clothing%252B1.jpg"
+  },
+  {
+    "id": 7,
+    "parent": 5,
+    "type": "subcategory",
+    "value": "hats",
+    "image_url": "http://2.bp.blogspot.com/-CYGzasO3kNM/TYFuJamxMqI/AAAAAAAABDY/zAhZRs_AfR0/s1600/clothing%252B1.jpg"
+  },
+  {
+    "id": 8,
+    "parent": 3,
+    "type": "subcategory",
+    "value": "croissants",
+    "image_url": "http://2.bp.blogspot.com/-CYGzasO3kNM/TYFuJamxMqI/AAAAAAAABDY/zAhZRs_AfR0/s1600/clothing%252B1.jpg"
   }
 ]
