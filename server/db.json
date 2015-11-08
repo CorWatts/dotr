@@ -1,47 +1,30 @@
 [
   {
+    "id": null,
+    "parent": null,
+    "type": "category",
+    "value": "flowers",
+    "image_url": "http://2.bp.blogspot.com/-t3G5WeJFNvU/TpMbp1V9lkI/AAAAAAAAAF4/NwSHhlbAcas/s320/Home-roses-Flowers.jpg"
+  },
+  {
     "id": 1,
     "parent": null,
     "type": "category",
-    "value": "clothing"
-  },
-  {
-    "id": 2,
-    "parent": null,
-    "type": "category",
-    "value": "edibles"
+    "value": "croissant",
+    "image_url": "http://4.bp.blogspot.com/-Eq61HkZNDSg/UaQ9sdHdE_I/AAAAAAAANCc/ayr5LlyHgjU/s320/croissant_16x9.jpg"
   },
   {
     "id": 3,
     "parent": null,
     "type": "category",
-    "value": "activities"
+    "value": "edibles",
+    "image_url": "http://ep.yimg.com/ay/entirelypets/nylabone-healthy-edibles-resealable-pouch-bacon-flavored-6-regular-11-21-oz-35.jpg"
   },
   {
     "id": 4,
-    "parent": 1,
-    "type": "subcategory",
-    "value": "dresses"
-  },
-  {
-    "id": 5,
-    "parent": 1,
-    "type": "subcategory",
-    "value": "shoes"
-  },
-  {
-    "id": 6,
-    "parent": 4,
-    "type": "item",
-    "value": {
-      "name": "blackhalo",
-      "desc": "This is the best dress"
-    }
-  },
-  {
-    "id": 7,
-    "parent": 1,
-    "type": "subcategory",
-    "value": "hats"
+    "parent": null,
+    "type": "category",
+    "value": "dresses",
+    "image_url": "http://4.bp.blogspot.com/-4uvkrQfa-RY/U9Ve_bC_UQI/AAAAAAAAD5s/0QS__Kabd28/s1600/baad9b46789b4d771430fb60664cf6db.jpeg"
   }
 ]

@@ -1,8 +1,9 @@
-var _        = require('lodash');
-var jsonfile = require('jsonfile');
-var errors   = require('../lib/errors');
-var helpers  = require('../lib/helpers');
-var config   = require('../config/config');
+var _           = require('lodash');
+var jsonfile    = require('jsonfile');
+var imagesearch = require('google-images');
+var errors      = require('../lib/errors');
+var helpers     = require('../lib/helpers');
+var config      = require('../config/config');
 
 var db   = config.db;
 var file = config.file;
@@ -51,21 +52,24 @@ exports.post = function(req, res, next) {
   if(existing_category !== undefined)
     errors.already_exists(res, "category");
 
-  json = {
-    "id": id,
-    "parent": null,
-    "type": "category",
-    "value": value
-  }
-  db.push(json);
+  imagesearch.search(value, {size: "small", callback: function (err, images) {
+    json = {
+      "id": id,
+      "parent": null,
+      "type": "category",
+      "value": value,
+      "image_url": images[0].url
+    }
+    db.push(json);
 
-  jsonfile.writeFileSync(file, db, {spaces: 2});
+    jsonfile.writeFileSync(file, db, {spaces: 2});
 
-  // Send back the value they posted
-  res.send(200, {
-    "status": "success",
-    "data": json
-  });
+    // Send back the value they posted
+    res.send(200, {
+      "status": "success",
+      "data": json
+    });
+  }});
 }
 
 exports.destroy = function(req, res, next) {

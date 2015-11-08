@@ -51,6 +51,11 @@ md-toolbar h1 {
   right: 40px;
 }
 
+md-card img.md-card-image {
+  height: 240px;
+  width: 240px;
+}
+
 #content img {
   display: block;
   height: auto;

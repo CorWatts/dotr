@@ -43,21 +43,19 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
         };
         $scope.cancel = function(ev2) {
           ev2.preventDefault();
-          debugger;
           $mdDialog.cancel();
         };
         $scope.answer = function(answer) {
           $mdDialog.hide(answer);
         };
         $scope.submit = function() {
-          debugger;
           $http.post('api/category', $scope.formData).then(function(response) {
             categories.push(response.data.data);
             $mdDialog.hide();
           });
         };
       },
-      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit($scope)" name="add"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button ng-click="submit()" class="md-primary"> Save </md-button> </div></md-dialog>',
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit($scope)" name="add"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary"> Save </md-button> </div></md-dialog>',
       targetEvent: ev
     }) .then(function(answer) {
       $scope.alert = 'You said the information was "' + answer + '".';
@@ -67,7 +65,6 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
   };
 
   $scope.showDelete = function(ev, categories, id) {
-    debugger;
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id) {
         $scope.formData = {};
@@ -92,7 +89,7 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
         };
       },
       locals: {id: id},
-      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </div></md-dialog>',
+      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <h2>Are you sure you want to delete?</h2> <div class="md-actions" layout="row" layout-align="center"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </div> </div></md-dialog>',
       targetEvent: ev
     }) .then(function(answer) {
       $scope.alert = 'You said the information was "' + answer + '".';
