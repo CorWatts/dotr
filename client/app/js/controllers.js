@@ -83,7 +83,7 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
           $http.put('api/category/' + id , $scope.formData).then(function(response) {
             var arr_id = _.findIndex(categories, function(category) {
               return category.id == id});
-            categories[arr_id] = {id: id, value: $scope.formData.value};
+            categories[arr_id] = response.data.data;
             $mdDialog.hide();
           });
         };
