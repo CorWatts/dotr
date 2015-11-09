@@ -81,32 +81,26 @@ exports.post = function(req, res, next) {
 exports.put = function(req, res, next) {
   value = req.body.value;
   id = req.body.id;
-  parent_id = req.body.parent_id;
 
-  var arr_id = _.findIndex(db, function(category) {
-    return category.id == id}
+  var arr_id = _.findIndex(db, function(subcategory) {
+    return subcategory.id == id}
   );
 
   if(arr_id === undefined)
-    errors.does_not_exist(res, "category");
+    errors.does_not_exist(res, "subcategory");
 
   imagesearch.search(value, {size: "small", callback: function (err, images) {
-    json = {
-      "id": id,
-      "parent": parent_id || db[arr_id].id,
-      "type": "category",
-      "value": value,
-      "image_url": images[0].url
-    }
+    db[arr_id].value = value;
+    db[arr_id].image_url = images[0].url;
 
-    db[arr_id] = json;
 
     jsonfile.writeFileSync(file, db, {spaces: 2});
 
     // Send back the value they posted
     res.send(200, {
       "status": "success",
-      "data": json });
+      "data": db[arr_id]
+    });
   }});
 }
 

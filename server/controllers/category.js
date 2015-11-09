@@ -84,22 +84,15 @@ exports.put = function(req, res, next) {
     errors.does_not_exist(res, "category");
 
   imagesearch.search(value, {size: "small", callback: function (err, images) {
-    json = {
-      "id": id,
-      "parent": null,
-      "type": "category",
-      "value": value,
-      "image_url": images[0].url
-    }
-
-    db[arr_id] = json;
+    db[arr_id].value = value;
+    db[arr_id].image_url = images[0].url;
 
     jsonfile.writeFileSync(file, db, {spaces: 2});
 
     // Send back the value they posted
     res.send(200, {
       "status": "success",
-      "data": json
+      "data": db[arr_id]
     });
   }});
 }
