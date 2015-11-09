@@ -46,7 +46,6 @@ exports.get = function(req, res, next) {
 
 exports.post = function(req, res, next) {
   categoryId = parseInt(req.params.categoryId);
-  console.log(categoryId);
   value = req.body.value;
 
   category = _.findWhere(db, {type: "category", id: categoryId});

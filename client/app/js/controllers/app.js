@@ -7,7 +7,6 @@ var AppCtrl = function($scope, $mdBottomSheet, $mdDialog){
 	// Bottomsheet & Modal Dialogs
 	$scope.alert = '';
 	$scope.showListBottomSheet = function($event) {
-    console.log("here");
 		$scope.alert = '';
 		$mdBottomSheet.show({
 			template: '<md-bottom-sheet class="md-list md-has-header"><md-list><md-list-item class="md-2-line" ng-repeat="item in items" role="link" md-ink-ripple><md-icon md-svg-icon="{{item.icon}}" aria-label="{{item.name}}"></md-icon><div class="md-list-item-text"><h3>{{item.name}}</h3></div></md-list-item> </md-list></md-bottom-sheet>',

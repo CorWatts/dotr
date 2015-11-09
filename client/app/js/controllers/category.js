@@ -67,9 +67,7 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
           $http.delete('api/category/'+id).then(function(response) {
             var arr_id = _.findIndex(categories, function(category) {
               return category.id == id});
-            console.log(arr_id);
             categories.splice(arr_id, 1);
-            console.log(categories);
             $mdDialog.hide();
           });
         };
