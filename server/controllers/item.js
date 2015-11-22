@@ -1,5 +1,6 @@
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
+var imagesearch = require('google-images');
 var util     = require('util');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
@@ -9,10 +10,27 @@ var db   = config.db;
 var file = config.file;
 
 exports.list = function(req, res, next) {
-  items = _.where(db, {type: "item"});
+  console.log(req.params);
+  criteria = {};
+  if(_.has(req.params, "parent_id"))
+    criteria.parent =  parseInt(req.params.parent_id);
+
+  if(_.has(req.params, "parent_name")) {
+    parent_name =  req.params.parent_name;
+  console.log(parent_name);
+    if(!_.has(criteria, "parent"))
+      criteria.parent = helpers.get_id(db, "subcategory", parent_name);
+  }
+  console.log(criteria);
+
+  criteria = _.merge(criteria, {type: "item"});
+  console.log(criteria);
+
+  items = _.where(db, criteria);
 
   res.send(200, {
     "status": "success",
+    "parent_id": criteria.parent,
     "data": items
   });
 }
@@ -30,46 +48,64 @@ exports.get = function(req, res, next) {
   });
 }
 
-
 exports.post = function(req, res, next) {
-  subcategory = req.params.subcategory;
-  name = req.body.name;
-  desc = req.body.desc;
+  subcategoryId = parseInt(req.params.subcategoryId);
+  value = req.body.value;
 
-  subcategory = _.findWhere(db, {type: "subcategory", value: subcategory});
+  subcategory = _.findWhere(db, {type: "subcategory", id: subcategoryId});
   if(subcategory === undefined)
     errors.does_not_exist(res, "subcategory");
 
   id = helpers.get_new_id(db);
 
-  //existing_item = _.findWhere(db, {type: "item", value: value});
-  existing_item = _.find(db, function(item) {
-    if(item.type === "item" &&item.value.name === name)
-      return true;
-  });
-
+  existing_item = _.findWhere(db, {type: "item", value: value});
   if(existing_item !== undefined)
     errors.already_exists(res, "item");
 
-
-  json = {
-    "id": id,
-    "parent": subcategory.id,
-    "type": "item",
-    "value": {
-      "name": name,
-      "desc": desc
+  imagesearch.search(value, {size: "small", callback: function (err, images) {
+    json = {
+      "id": id,
+      "parent": subcategory.id,
+      "type": "item",
+      "value": value,
+      "image_url": images[0].url
     }
-  }
-  db.push(json);
+    db.push(json);
 
-  jsonfile.writeFileSync(file, db, {spaces: 2});
+    jsonfile.writeFileSync(file, db, {spaces: 2});
 
-  // Send back the value they posted
-  res.send(200, {
-    "response": "success",
-    "data": json
-  });
+    // Send back the value they posted
+    res.send(200, {
+      "response": "success",
+      "data": json
+    });
+  }});
+}
+
+exports.put = function(req, res, next) {
+  value = req.body.value;
+  id = req.body.id;
+
+  var arr_id = _.findIndex(db, function(item) {
+    return item.id == id}
+  );
+
+  if(arr_id === undefined)
+    errors.does_not_exist(res, "item");
+
+  imagesearch.search(value, {size: "small", callback: function (err, images) {
+    db[arr_id].value = value;
+    db[arr_id].image_url = images[0].url;
+
+
+    jsonfile.writeFileSync(file, db, {spaces: 2});
+
+    // Send back the value they posted
+    res.send(200, {
+      "status": "success",
+      "data": db[arr_id]
+    });
+  }});
 }
 
 exports.destroy = function(req, res, next) {
@@ -87,3 +123,4 @@ exports.destroy = function(req, res, next) {
     "response": "success"
   });
 };
+

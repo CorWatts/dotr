@@ -1,0 +1,23 @@
+<div ng-controller="ItemCtrl">
+  <span>
+    <h2 class="md-title inset">Items in {{subcategoryName}} </h2>
+    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, items, categoryId)">
+      <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+    </md-button>
+  </span>
+  <div class='md-padding' layout="row" layout-wrap>
+    <md-card ng-repeat="item in items">
+      <a href="#/{{item.value}}">
+        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image caption">
+        <md-card-content>
+          <h2>{{item.value}}</h2>
+        </md-card-content>
+      </a>
+      <md-divider></md-divider>
+      <div class="md-actions" layout="row" layout-align="center">
+        <md-button class="md-primary" ng-click="showEdit($event, items, item.id, item.value)">Edit</md-button>
+        <md-button class="md-warn" ng-click="showDelete($event, items, item.id)">Delete</md-button>
+      </div>
+    </md-card>
+  </div>
+</div>

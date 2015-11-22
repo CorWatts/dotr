@@ -32,7 +32,8 @@ namespace(server, '/api', function () {
   // item actions
   server.get('/items', itemController.list);
   server.get('/item/:id', itemController.get);
-  server.post('/item/:subcategory', itemController.post);
+  server.put('/item/:id', itemController.put);
+  server.post('/item/:subcategoryId', itemController.post);
   server.del('/item/:id', itemController.destroy);
 });
 

@@ -51,11 +51,15 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: '../partials/category-list.html',
       controller: 'CategoryCtrl'
     }).
-  when('/:category', {
-    templateUrl: '../partials/subcategory-list.html',
-    controller: 'SubcategoryCtrl'
-  }).
-  otherwise({
-    redirectTo: '/error'
-  });
+    when('/:category', {
+      templateUrl: '../partials/subcategory-list.html',
+      controller: 'SubcategoryCtrl'
+    }).
+    when('/:category/:subcategory', {
+      templateUrl: '../partials/item-list.html',
+      controller: 'ItemCtrl'
+    }).
+    otherwise({
+      redirectTo: '/error'
+    });
 }]);

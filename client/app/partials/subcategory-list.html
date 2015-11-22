@@ -7,7 +7,7 @@
   </span>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="subcategory in subcategories">
-      <a href="#/{{subcategory.value}}">
+      <a href="#/{{categoryName}}/{{subcategory.value}}">
         <img ng-src="{{subcategory.image_url}}" class="md-card-image" alt="image caption">
         <md-card-content>
           <h2>{{subcategory.value}}</h2>
