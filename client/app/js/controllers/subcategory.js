@@ -18,8 +18,8 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         $scope.submit = function() {
           $http.post('api/subcategory/'+categoryId, $scope.formData, {headers: {'Content-Type': 'application/json'}}).then(function(response) {
             subcategories.push(response.data.data);
-            $mdDialog.hide();
           });
+          $mdDialog.hide();
         };
       },
       template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit()" name="add"> <h2>Add a Subcategory</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Save </md-button> </div></md-dialog>',
@@ -50,10 +50,11 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         $scope.update = function() {
           $http.put('api/subcategory/' + id , $scope.formData).then(function(response) {
             var arr_id = _.findIndex(subcategories, function(subcategory) {
-              return subcategory.id == id});
+              return subcategory.id == id;
+            });
             subcategories[arr_id] = response.data.data;
-            $mdDialog.hide();
           });
+          $mdDialog.hide();
         };
       },
       locals: {id: id, value: value},
@@ -84,8 +85,8 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
             var arr_id = _.findIndex(subcategories, function(subcategory) {
               return subcategory.id == id});
             subcategories.splice(arr_id, 1);
-            $mdDialog.hide();
           });
+          $mdDialog.hide();
         };
       },
       locals: {id: id},

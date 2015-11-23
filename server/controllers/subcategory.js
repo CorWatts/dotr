@@ -83,8 +83,8 @@ exports.put = function(req, res, next) {
   id = req.body.id;
 
   var arr_id = _.findIndex(db, function(subcategory) {
-    return subcategory.id == id}
-  );
+    return subcategory.id == id;
+  });
 
   if(arr_id === undefined)
     errors.does_not_exist(res, "subcategory");

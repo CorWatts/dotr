@@ -18,8 +18,8 @@ var ItemCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         $scope.submit = function() {
           $http.post('api/item/'+subcategoryId, $scope.formData, {headers: {'Content-Type': 'application/json'}}).then(function(response) {
             items.push(response.data.data);
-            $mdDialog.hide();
           });
+          $mdDialog.hide();
         };
       },
       template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit()" name="add"> <h2>Add an Item</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value"> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Save </md-button> </div></md-dialog>',
@@ -53,8 +53,8 @@ var ItemCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
               return item.id == id
             });
             items[arr_id] = response.data.data;
-            $mdDialog.hide();
           });
+          $mdDialog.hide();
         };
       },
       locals: {id: id, value: value},

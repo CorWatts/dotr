@@ -77,8 +77,8 @@ exports.put = function(req, res, next) {
   id = req.body.id;
 
   var arr_id = _.findIndex(db, function(category) {
-    return category.id == id}
-  );
+    return category.id == id;
+  });
 
   if(arr_id === undefined)
     errors.does_not_exist(res, "category");
