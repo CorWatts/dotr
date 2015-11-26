@@ -10,21 +10,17 @@ var db   = config.db;
 var file = config.file;
 
 exports.list = function(req, res, next) {
-  console.log(req.params);
   criteria = {};
   if(_.has(req.params, "parent_id"))
     criteria.parent =  parseInt(req.params.parent_id);
 
   if(_.has(req.params, "parent_name")) {
     parent_name =  req.params.parent_name;
-  console.log(parent_name);
     if(!_.has(criteria, "parent"))
       criteria.parent = helpers.get_id(db, "subcategory", parent_name);
   }
-  console.log(criteria);
 
   criteria = _.merge(criteria, {type: "item"});
-  console.log(criteria);
 
   items = _.where(db, criteria);
 

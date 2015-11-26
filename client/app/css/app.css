@@ -76,6 +76,10 @@ button > md-icon {
   margin: 0px auto 0px auto;
 }
 
+md-list > md-list-item > ng-md-icon {
+  padding: 10px;
+}
+
 
 /* Utils */
 
