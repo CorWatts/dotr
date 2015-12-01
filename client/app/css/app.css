@@ -67,6 +67,11 @@ md-card a {
   color: inherit;
 }
 
+md-card-content h2 {
+  word-wrap: break-word;
+  max-width: 208px;
+}
+
 ng-md-icon > svg {
 	display: block;
 	margin: 0px auto 0px auto;
