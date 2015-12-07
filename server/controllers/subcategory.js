@@ -1,7 +1,6 @@
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
 var imagesearch = require('google-images');
-var util     = require('util');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');

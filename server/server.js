@@ -1,9 +1,4 @@
 var restify  = require('restify');
-var _        = require('lodash');
-var jsonfile = require('jsonfile');
-var util     = require('util');
-var errors   = require('./lib/errors');
-var config   = require('./config/config');
 
 var server = restify.createServer();
 server.use(restify.acceptParser(server.acceptable));

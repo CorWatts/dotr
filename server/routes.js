@@ -5,7 +5,6 @@ var restify = module.parent.exports.restify;
 
 var categoryController = require("./controllers/category");
 var subcategoryController = require("./controllers/subcategory");
-var helpers  = require('./lib/helpers');
 var itemController = require("./controllers/item");
 
 server.get(/^\/(?!api).*/, restify.serveStatic({
