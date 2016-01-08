@@ -57,7 +57,18 @@ exports.post = function(req, res, next) {
   if(existing_item !== undefined)
     errors.already_exists(res, "item");
 
+  console.log(value);
   imagesearch.search(value, {size: "small", callback: function (err, images) {
+    console.log(value);
+    console.log(images);
+    console.log(err);
+    debugger;
+
+    if(images.length !== 0)
+      image_url = images[0].url;
+    else
+      image_url = "https://i.imgur.com/EJDyDie.jpg";
+
     json = {
       "id": id,
       "parent": subcategory.id,
