@@ -99,6 +99,7 @@ var ItemCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
 
   $scope.getItemList = function($scope, $http) {
     $http.get('api/items?parent_name='+$routeParams.subcategory).then(function(response) {
+      $scope.categoryName = $routeParams.category;
       $scope.subcategoryName = $routeParams.subcategory;
       $scope.items = response.data.data;
       $scope.categoryId = response.data.parent_id;

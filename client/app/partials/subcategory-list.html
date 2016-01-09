@@ -1,10 +1,13 @@
 <div ng-controller="SubcategoryCtrl">
-  <span>
+  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap>
     <h2 class="md-title inset">Subcategories in {{categoryName}} </h2>
     <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, subcategories, categoryId)">
       <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
-  </span>
+    <md-button class="md-raised md-primary" ng-href="#/">
+        <ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> One Level
+    </md-button>
+  </section>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="subcategory in subcategories">
       <a href="#/{{categoryName}}/{{subcategory.value}}">

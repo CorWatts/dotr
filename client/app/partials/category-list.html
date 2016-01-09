@@ -1,10 +1,10 @@
 <div ng-controller="CategoryCtrl">
-  <span>
+  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap>
     <h2 class="md-title inset">Categories</h2>
     <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, categories)">
       <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
-  </span>
+  </section>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="category in categories">
       <a href="#/{{category.value}}">
