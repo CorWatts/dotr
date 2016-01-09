@@ -8,7 +8,7 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         $scope.hide = function() {
           $mdDialog.hide();
         };
-        $scope.cancel = function(ev2) {
+        $scope.cancel = function(ev2)  {
           ev2.preventDefault();
           $mdDialog.cancel();
         };
@@ -22,7 +22,7 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
           $mdDialog.hide();
         };
       },
-      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit()" name="add"> <h2>Add a Subcategory</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Save </md-button> </div></md-dialog>',
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit()" name="add"> <h2>Add a Subcategory</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </md-content> <md-dialog-actions layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Save </md-button> </md-dialog-actions> </form> </md-dialog>',
       locals: {categoryId: categoryId},
       targetEvent: ev
     }) .then(function(answer) {
@@ -58,7 +58,7 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         };
       },
       locals: {id: id, value: value},
-      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="update($scope)" name="add"> <h2>Edit a Subcategory</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </form> </md-content> <div class="md-actions" layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary"> Update </md-button> </div></md-dialog>',
+      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="update($scope)" name="add"> <h2>Edit a Subcategory</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </md-content> <md-dialog-actions layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Update </md-button> </md-dialog-actions> </form> </md-dialog>',
       targetEvent: ev
     }) .then(function(answer) {
       $scope.alert = 'You said the information was "' + answer + '".';
@@ -90,7 +90,7 @@ var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
         };
       },
       locals: {id: id},
-      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <h2>Are you sure you want to delete?</h2> <div class="md-actions" layout="row" layout-align="center"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </div> </div></md-dialog>', targetEvent: ev }) .then(function(answer) {
+      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <h2>Are you sure you want to delete?</h2> <md-dialog-actions layout="row" layout-align="center"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </md-dialog-actions></md-dialog>', targetEvent: ev }) .then(function(answer) {
       $scope.alert = 'You said the information was "' + answer + '".';
     }, function() {
       $scope.alert = 'You cancelled the dialog.';

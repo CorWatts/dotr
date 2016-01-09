@@ -15,10 +15,10 @@
           <h2>{{item.value}}</h2>
         </md-card-content>
       <md-divider></md-divider>
-      <div class="md-actions" layout="row" layout-align="center">
+      <md-dialog-action layout="row" layout-align="center">
         <md-button class="md-primary" ng-click="showEdit($event, items, item.id, item.value)">Edit</md-button>
         <md-button class="md-warn" ng-click="showDelete($event, items, item.id)">Delete</md-button>
-      </div>
+      </md-dialog-action>
     </md-card>
   </div>
 </div>
