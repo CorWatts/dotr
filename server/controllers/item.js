@@ -1,9 +1,9 @@
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
-var imagesearch = require('google-images');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');
+var gi          = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -57,35 +57,30 @@ exports.post = function(req, res, next) {
   if(existing_item !== undefined)
     errors.already_exists(res, "item");
 
-  console.log(value);
-  imagesearch.search(value, {size: "small", callback: function (err, images) {
-    console.log(value);
-    console.log(images);
-    console.log(err);
-    debugger;
+  gi.search(value, {size: 'medium'})
+    .then(function(images) {
+      if(images.length !== 0)
+        image_url = images[0].url;
+      else
+        image_url = "https://i.imgur.com/EJDyDie.jpg";
 
-    if(images.length !== 0)
-      image_url = images[0].url;
-    else
-      image_url = "https://i.imgur.com/EJDyDie.jpg";
+      json = {
+        "id": id,
+        "parent": subcategory.id,
+        "type": "item",
+        "value": value,
+        "image_url": images[0].url
+      }
+      db.push(json);
 
-    json = {
-      "id": id,
-      "parent": subcategory.id,
-      "type": "item",
-      "value": value,
-      "image_url": images[0].url
-    }
-    db.push(json);
+      jsonfile.writeFileSync(file, db, {spaces: 2});
 
-    jsonfile.writeFileSync(file, db, {spaces: 2});
-
-    // Send back the value they posted
-    res.send(200, {
-      "response": "success",
-      "data": json
+      // Send back the value they posted
+      res.send(200, {
+        "response": "success",
+        "data": json
+      });
     });
-  }});
 }
 
 exports.put = function(req, res, next) {
@@ -99,19 +94,20 @@ exports.put = function(req, res, next) {
   if(arr_id === undefined)
     errors.does_not_exist(res, "item");
 
-  imagesearch.search(value, {size: "small", callback: function (err, images) {
-    db[arr_id].value = value;
-    db[arr_id].image_url = images[0].url;
+  gi.search(value, {size: 'medium'})
+    .then(function(images) {
+      db[arr_id].value = value;
+      db[arr_id].image_url = images[0].url;
 
 
-    jsonfile.writeFileSync(file, db, {spaces: 2});
+      jsonfile.writeFileSync(file, db, {spaces: 2});
 
-    // Send back the value they posted
-    res.send(200, {
-      "status": "success",
-      "data": db[arr_id]
+      // Send back the value they posted
+      res.send(200, {
+        "status": "success",
+        "data": db[arr_id]
+      });
     });
-  }});
 }
 
 exports.destroy = function(req, res, next) {
