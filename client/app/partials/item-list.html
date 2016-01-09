@@ -10,12 +10,10 @@
   </section>
   <div class='md-padding' layout="row" layout-wrap>
     <md-card ng-repeat="item in items">
-      <a href="#/{{item.value}}">
-        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image caption">
+        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image caption" ng-click="showEdit($event, items, item.id, item.value)">
         <md-card-content>
           <h2>{{item.value}}</h2>
         </md-card-content>
-      </a>
       <md-divider></md-divider>
       <div class="md-actions" layout="row" layout-align="center">
         <md-button class="md-primary" ng-click="showEdit($event, items, item.id, item.value)">Edit</md-button>
