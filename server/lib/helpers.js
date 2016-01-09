@@ -1,6 +1,9 @@
 // just for testing: https://jsfiddle.net/5xd1y3e8/
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
+var googleImages = require('google-images');
+//var gi = googleImages('007372715646685475913:rqzmtjdyldw', 'AIzaSyBu0hwI5PVwBO5iMKQL-rbFN_u6j9WVw7g');
+var gi = googleImages(process.env.CES_ID, process.env.API_KEY);
 
 var get_id = function(db, level, value) {
   obj = _.findWhere(db, {type: level, value: value});
@@ -42,9 +45,18 @@ var delete_from_id = function(db, file, id) {
   });
 };
 
+var success = function(data) {
+	res.send(200, {
+		"status": "success",
+		"data": data
+	});
+};
+
+
 module.exports = {
-  get_id: get_id,
-  get_new_id: get_new_id,
-  delete_id: delete_id,
-  delete_from_id: delete_from_id
+  get_id: get_id
+  , get_new_id: get_new_id
+  , delete_id: delete_id
+  , delete_from_id: delete_from_id
+  , gi: gi
 }

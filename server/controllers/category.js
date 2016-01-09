@@ -1,9 +1,9 @@
 var _           = require('lodash');
 var jsonfile    = require('jsonfile');
-var imagesearch = require('google-images');
 var errors      = require('../lib/errors');
 var helpers     = require('../lib/helpers');
 var config      = require('../config/config');
+var gi          = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -46,30 +46,35 @@ exports.sub = function(req, res, next) {
 exports.post = function(req, res, next) {
   value = req.body.value;
 
-  id = helpers.get_new_id(db);
+	id = helpers.get_new_id(db);
 
-  existing_category = _.findWhere(db, {type: "category", value: value});
-  if(existing_category !== undefined)
-    errors.already_exists(res, "category");
+	existing_category = _.findWhere(db, {type: "category", value: value});
+	if(existing_category !== undefined)
+		errors.already_exists(res, "category");
 
-  imagesearch.search(value, {size: "small", callback: function (err, images) {
-    json = {
-      "id": id,
-      "parent": null,
-      "type": "category",
-      "value": value,
-      "image_url": images[0].url
-    }
-    db.push(json);
+  gi.search(value, {size: 'medium'})
+    .then(function(images) {
+      if (images.length === 0) {
+        res.send(404, {error: "No images were found!"});
+      } else {
+        json = {
+          "id": id,
+          "parent": null,
+          "type": "category",
+          "value": value,
+          "image_url": images[0].url
+        }
+        db.push(json);
 
-    jsonfile.writeFileSync(file, db, {spaces: 2});
+        jsonfile.writeFileSync(file, db, {spaces: 2});
 
-    // Send back the value they posted
-    res.send(200, {
-      "status": "success",
-      "data": json
+        // Send back the value they posted
+        helpers.success(200, {
+          "status": "success",
+          "data": json
+        });
+      }
     });
-  }});
 }
 
 exports.put = function(req, res, next) {
@@ -83,18 +88,23 @@ exports.put = function(req, res, next) {
   if(arr_id === undefined)
     errors.does_not_exist(res, "category");
 
-  imagesearch.search(value, {size: "small", callback: function (err, images) {
-    db[arr_id].value = value;
-    db[arr_id].image_url = images[0].url;
+	gi.search(value, {size: 'medium'})
+        .then(function(images) {
+            if (images.length === 0) {
+                res.send(404, {error: "No images were found!"});
+            } else {
+                db[arr_id].value = value;
+                db[arr_id].image_url = images[0].url;
 
-    jsonfile.writeFileSync(file, db, {spaces: 2});
+                jsonfile.writeFileSync(file, db, {spaces: 2});
 
-    // Send back the value they posted
-    res.send(200, {
-      "status": "success",
-      "data": db[arr_id]
-    });
-  }});
+                // Send back the value they posted
+                res.send(200, {
+                    "status": "success",
+                    "data": db[arr_id]
+                });
+            }
+        });
 }
 
 exports.destroy = function(req, res, next) {

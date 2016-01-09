@@ -6,7 +6,7 @@
   "main": "server.js",
   "dependencies": {
     "bluebird": "^3.0.6",
-    "google-images": "^0.1.4",
+    "google-images": "https://github.com/vdemedes/google-images/tarball/master",
     "jsonfile": "^2.2.3",
     "lodash": "^3.10.1",
     "restify": "^4.0.3",
