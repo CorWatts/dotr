@@ -69,7 +69,7 @@ exports.post = function(req, res, next) {
         "parent": subcategory.id,
         "type": "item",
         "value": value,
-        "image_url": images[0].url
+        "image_url": image_url
       }
       db.push(json);
 

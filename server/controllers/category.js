@@ -54,26 +54,28 @@ exports.post = function(req, res, next) {
 
   gi.search(value, {size: 'medium'})
     .then(function(images) {
-      if (images.length === 0) {
-        res.send(404, {error: "No images were found!"});
-      } else {
-        json = {
-          "id": id,
-          "parent": null,
-          "type": "category",
-          "value": value,
-          "image_url": images[0].url
-        }
-        db.push(json);
+      if(images.length !== 0)
+        image_url = images[0].url;
+      else
+        image_url = "https://i.imgur.com/EJDyDie.jpg";
 
-        jsonfile.writeFileSync(file, db, {spaces: 2});
-
-        // Send back the value they posted
-        helpers.success(200, {
-          "status": "success",
-          "data": json
-        });
+      json = {
+        "id": id,
+        "parent": null,
+        "type": "category",
+        "value": value,
+        "image_url": image_url
       }
+      db.push(json);
+
+      jsonfile.writeFileSync(file, db, {spaces: 2});
+
+      // Send back the value they posted
+      res.send(200, {
+        "status": "success",
+        "status": "success",
+        "data": json
+      });
     });
 }
 
@@ -90,20 +92,21 @@ exports.put = function(req, res, next) {
 
 	gi.search(value, {size: 'medium'})
         .then(function(images) {
-            if (images.length === 0) {
-                res.send(404, {error: "No images were found!"});
-            } else {
-                db[arr_id].value = value;
-                db[arr_id].image_url = images[0].url;
+          if(images.length !== 0)
+            image_url = images[0].url;
+          else
+            image_url = "https://i.imgur.com/EJDyDie.jpg";
 
-                jsonfile.writeFileSync(file, db, {spaces: 2});
+            db[arr_id].value = value;
+            db[arr_id].image_url = image_url;
 
-                // Send back the value they posted
-                res.send(200, {
-                    "status": "success",
-                    "data": db[arr_id]
-                });
-            }
+            jsonfile.writeFileSync(file, db, {spaces: 2});
+
+            // Send back the value they posted
+            res.send(200, {
+                "status": "success",
+                "data": db[arr_id]
+            });
         });
 }
 
