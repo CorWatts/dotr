@@ -27,10 +27,6 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
       },
       template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="add" ng-submit="submit()"> <h2>Add a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </md-content> <md-dialog-actions layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary" type="submit"> Save </md-button> </md-dialog-actions> </form> </md-dialog>',
       targetEvent: ev
-    }) .then(function(answer) {
-      $scope.alert = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.alert = 'You cancelled the dialog.';
     });
   };
 
@@ -39,6 +35,9 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
       controller: function ($scope, $http, $mdDialog, id, value) {
         categoryControllerMethods.call(this)
         $scope.formData = {id: id, value: value};
+        $scope.cancel = function() {
+          $mdDialog.cancel();
+        };
         $scope.update = function() {
           $http.put('api/category/' + id , $scope.formData).then(function(response) {
             var arr_id = _.findIndex(categories, function(category) {
@@ -51,10 +50,6 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
       locals: {id: id, value: value},
       template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="update($scope)" name="add"> <h2>Edit a Category</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </md-content> <md-dialog-actions layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button class="md-primary" type="submit"> Update </md-button> </md-dialog-actions> </form> </md-dialog>',
       targetEvent: ev
-    }) .then(function(answer) {
-      $scope.alert = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.alert = 'You cancelled the dialog.';
     });
   };
 
@@ -76,10 +71,8 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
         };
       },
       locals: {id: id},
-      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <h2>Are you sure you want to delete?</h2> <md-dialog-actions layout="row" layout-align="center"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </md-dialog-actions></md-dialog>', targetEvent: ev }) .then(function(answer) {
-      $scope.alert = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.alert = 'You cancelled the dialog.';
+      template: '<md-dialog aria-label="Confirm Delete"> <md-content class="md-padding"> <h2>Are you sure you want to delete?</h2> <md-dialog-actions layout="row" layout-align="center"> <md-button ng-click="cancel()"> Cancel </md-button> <md-button ng-click="delete()" class="md-warn"> Delete</md-button> </md-dialog-actions></md-dialog>',
+      targetEvent: ev
     });
   };
 
