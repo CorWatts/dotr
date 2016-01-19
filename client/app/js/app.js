@@ -15,7 +15,7 @@ app.config(function($mdThemingProvider) {
     .primaryPalette('grey')
 });
 
-app.config(function($mdThemingProvider, $mdIconProvider){
+app.config(function($mdThemingProvider){
 
   var customCyanMap = $mdThemingProvider.extendPalette('cyan', {
     'contrastDefaultColor': 'light',
@@ -40,6 +40,18 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: '../partials/category-list.html',
       controller: 'CategoryCtrl'
     }).
+    when('/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
+    when('/:category/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
+    when('/:category/:subcategory/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
     when('/:category', {
       templateUrl: '../partials/subcategory-list.html',
       controller: 'SubcategoryCtrl'
@@ -51,4 +63,8 @@ app.config(['$routeProvider', function($routeProvider) {
     otherwise({
       redirectTo: '/error'
     });
+    //when('/:type/edit', {
+      //templateUrl: '../partials/edit.html',
+      //controller: 'EditController'
+    //}).
 }]);

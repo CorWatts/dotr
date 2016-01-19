@@ -17,13 +17,14 @@
 		<script src="./bower_components/angular-aria/angular-aria.js"></script>
 		<script src="./bower_components/angular-material/angular-material.js"></script>
 		<script src="./bower_components/angular-route/angular-route.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-material-icons/0.6.0/angular-material-icons.min.js"></script>
 
 		<script src="js/app.js"></script>
 		<script src="js/controllers/app.js"></script>
   	<script src="js/controllers/category.js"></script>
   	<script src="js/controllers/subcategory.js"></script>
   	<script src="js/controllers/item.js"></script>
+  	<script src="js/controllers/add.js"></script>
   	<script src="js/controllers.js"></script>
   	<!--<script src="js/animations.js"></script>
   	<script src="js/filters.js"></script>
@@ -40,15 +41,14 @@
 	</head>
 <body layout="row">
   <div class="relative" layout-fill role="main" ng-controller="AppCtrl">
-    <md-toolbar class="animate-show md-tall md-whiteframe-z1">
+    <md-toolbar class="animate-show md-whiteframe-z1">
       <div class="md-toolbar-tools">
-        <a href="#/"><h3>Dotr -- dote on those you love</h3></a>
-        <span flex></span>
+        <h2><a href="#/">Dotr -- dote on those you love</a></h2>
+		<span flex></span>
         <md-button class="md-icon-button" aria-label="Open Settings" ng-click="showListBottomSheet($event)">
           <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
         </md-button>
       </div>
-      <span flex></span>
     </md-toolbar>
 
 		<div ng-view></div>

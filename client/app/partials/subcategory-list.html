@@ -1,17 +1,17 @@
 <div ng-controller="SubcategoryCtrl">
-  <section layout="row" layout-sm="column" layout-align="start center" layout-wrap>
+  <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
     <h2 class="md-title inset">Subcategories in {{categoryName}} </h2>
-    <md-button id='add-button' class="md-fab" aria-label="Add" ng-click="showAdd($event, subcategories, categoryId)">
+    <md-button id='add-button' class="md-fab" aria-label="Add" href="/#/{{categoryName}}/add">
       <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
     <md-button class="md-raised md-primary" ng-href="#/">
         <ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> One Level
     </md-button>
   </section>
-  <div class='md-padding' layout="row" layout-wrap>
+  <div class='md-padding' layout="row" layout-align="center start" layout-wrap>
     <md-card ng-repeat="subcategory in subcategories">
       <a href="#/{{categoryName}}/{{subcategory.value}}">
-        <img ng-src="{{subcategory.image_url}}" class="md-card-image" alt="image caption">
+          <img ng-src="{{subcategory.image_url}}" class="md-card-image" alt="image caption">
         <md-card-content>
           <h2>{{subcategory.value}}</h2>
         </md-card-content>

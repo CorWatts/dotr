@@ -19,6 +19,9 @@ exports.list = function(req, res, next) {
       criteria.parent = helpers.get_id(db, "category", parent_name);
   }
 
+  if(_.has(req.params, "value"))
+    criteria.value = req.params.value;
+
   criteria = _.merge(criteria, {type: "subcategory"});
 
   subcategories = _.where(db, criteria);
