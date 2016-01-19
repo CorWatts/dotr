@@ -40,6 +40,10 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: '../partials/category-list.html',
       controller: 'CategoryCtrl'
     }).
+    when('/:type/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
     when('/:category', {
       templateUrl: '../partials/subcategory-list.html',
       controller: 'SubcategoryCtrl'
@@ -51,4 +55,8 @@ app.config(['$routeProvider', function($routeProvider) {
     otherwise({
       redirectTo: '/error'
     });
+    //when('/:type/edit', {
+      //templateUrl: '../partials/edit.html',
+      //controller: 'EditController'
+    //}).
 }]);

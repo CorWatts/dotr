@@ -82,6 +82,10 @@ button > md-icon {
   margin: 0px auto 0px auto;
 }
 
+.md-fab ng-md-icon svg {
+  margin-top: 16px;
+}
+
 md-list > md-list-item > ng-md-icon {
   padding: 10px;
 }

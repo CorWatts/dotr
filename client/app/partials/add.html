@@ -1,0 +1,21 @@
+<div ng-controller="AddCtrl">
+  	<section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
+    	<h2 class="md-title inset">Add {{type_article}} {{pretty_type}}</h2>
+    	<md-button class="md-raised md-primary" ng-href="#/">
+        	<ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> Back to {{type_plural}}
+    	</md-button>
+  	</section>
+	<form name="addForm" ng-submit="submit()">
+		<md-input-container md-no-float class="md-block">
+			<label>{{pretty_type}} Name</label>
+			<input type="text" ng-model="formData.value" required>
+			<div ng-messages="addForm.value.$error">
+				<div ng-message="required">This is required.</div>
+			</div>
+		</md-input-container>
+        <section layout="row" layout-xs="column" layout-align="center center" layout-wrap>
+            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+            <md-button class="md-warn" href="/#/">Cancel</md-button>
+        </section>
+	</form>
+</div>
