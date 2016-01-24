@@ -15,7 +15,7 @@ app.config(function($mdThemingProvider) {
     .primaryPalette('grey')
 });
 
-app.config(function($mdThemingProvider, $mdIconProvider){
+app.config(function($mdThemingProvider){
 
   var customCyanMap = $mdThemingProvider.extendPalette('cyan', {
     'contrastDefaultColor': 'light',
@@ -40,7 +40,15 @@ app.config(['$routeProvider', function($routeProvider) {
       templateUrl: '../partials/category-list.html',
       controller: 'CategoryCtrl'
     }).
-    when('/:type/add', {
+    when('/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
+    when('/:category/add', {
+      templateUrl: '../partials/add.html',
+      controller: 'AddCtrl'
+    }).
+    when('/:category/:subcategory/add', {
       templateUrl: '../partials/add.html',
       controller: 'AddCtrl'
     }).

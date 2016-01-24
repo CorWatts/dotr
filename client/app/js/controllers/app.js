@@ -1,4 +1,4 @@
-var AppCtrl = function($scope, $mdBottomSheet, $mdDialog){
+var AppCtrl = function($scope, $mdBottomSheet, $mdDialog, $location){
 	// Toolbar search toggle
 	$scope.toggleSearch = function(element) {
 		$scope.showSearch = !$scope.showSearch;
@@ -9,19 +9,28 @@ var AppCtrl = function($scope, $mdBottomSheet, $mdDialog){
 	$scope.showListBottomSheet = function($event) {
 		$scope.alert = '';
 		$mdBottomSheet.show({
-      template: '<md-bottom-sheet class="md-list md-has-header"><md-list><md-list-item class="md-2-line" ng-repeat="item in items" role="link" md-ink-ripple><ng-md-icon icon="{{item.icon}}"></ng-md-icon><div class="md-list-item-text"><h3>{{item.name}}</h3></div></md-list-item> </md-list></md-bottom-sheet>',
+      template: 
+        '<md-bottom-sheet class="md-list md-has-header">' +
+          '<md-list>' +
+            '<md-list-item class="md-2-line" ng-repeat="item in items" role="link" md-ink-ripple ng-click="listItemClick($index)">' +
+              '<ng-md-icon icon="{{item.icon}}"> </ng-md-icon>' +
+              '<div class="md-list-item-text">' +
+                '<h3>{{item.name}}</h3>' +
+              '</div>' +
+            '</md-list-item> ' +
+          '</md-list>' +
+        '</md-bottom-sheet>',
 			controller: 'ListBottomSheetCtrl',
 			targetEvent: $event
 		}).then(function(clickedItem) {
-			$scope.alert = clickedItem.name + ' clicked!';
-		});
+      $location.path(clickedItem.url);
+    });
 	};
 };
 
 var ListBottomSheetCtrl = function($scope, $mdBottomSheet) {
 	$scope.items = [
-	{ name: 'About', icon: '' },
-	{ name: 'Logout', icon: 'logout' },
+	{ name: 'About', icon: '', url: 'about'},
 	];
 
 	$scope.listItemClick = function($index) {

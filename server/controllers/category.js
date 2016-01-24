@@ -9,7 +9,15 @@ var db   = config.db;
 var file = config.file;
 
 exports.list = function(req, res, next) {
-  categories = _.where(db, {type: "category"});
+  criteria = {};
+  if(_.has(req.params, "id"))
+    criteria.id =  parseInt(req.params.id);
+
+  if(_.has(req.params, "value"))
+    criteria.value = req.params.value;
+
+  criteria = _.merge(criteria, {type: "category"});
+  categories = _.where(db, criteria);
 
   res.send(200, {
     "status": "success",
