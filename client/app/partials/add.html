@@ -1,21 +1,33 @@
-<div ng-controller="AddCtrl">
-  	<section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
-    	<h2 class="md-title inset">Add {{type_article}} {{pretty_type}}</h2>
-        <md-button class="md-raised md-primary" ng-href="#/{{back_url}}">
-        	<ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> Back to {{pretty_type_plural}}
-    	</md-button>
-  	</section>
-	<form name="addForm" ng-submit="submit(type)" autocomplete="false">
-		<md-input-container md-no-float class="md-block">
-			<label>{{pretty_type}} Name</label>
-			<input type="text" ng-model="formData.value" required autofocus autocomplete="false">
-			<div ng-messages="addForm.value.$error">
-				<div ng-message="required">This is required.</div>
-			</div>
-		</md-input-container>
-        <section layout="row" layout-xs="column" layout-align="center center" layout-wrap>
-            <md-button class="md-raised md-primary" type="submit">Submit</md-button>
-            <md-button class="md-warn" href="/#/">Cancel</md-button>
-        </section>
-	</form>
+<div class="relative" ng-controller="AppCtrl">
+  <md-toolbar class="animate-show md-whiteframe-z1">
+    <div class="md-toolbar-tools">
+      <md-button aria-label="Go Back" class="md-icon-button" ng-href="#/{{back_url}}">
+        <ng-md-icon icon="arrow_back" style="fill: white"></ng-md-icon>
+      </md-button>
+      <h2><a href="#/">Dotr -- dote on those you love</a></h2>
+    	<span flex></span>
+      <md-button class="md-icon-button" aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+      <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <div ng-controller="AddCtrl">
+    <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
+      <h2 class="md-title inset">Add {{type_article}} {{pretty_type}}</h2>
+    </section>
+    <form name="addForm" ng-submit="submit(type)" autocomplete="false">
+      <md-input-container md-no-float class="md-block">
+        <label>{{pretty_type}} Name</label>
+        <input type="text" ng-model="formData.value" required autofocus autocomplete="false">
+        <div ng-messages="addForm.value.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+      <section layout="row" layout-xs="column" layout-align="center center" layout-wrap>
+        <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+        <md-button class="md-warn" href="/#/">Cancel</md-button>
+      </section>
+    </form>
+  </div>
 </div>

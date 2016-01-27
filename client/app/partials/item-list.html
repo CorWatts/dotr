@@ -1,24 +1,36 @@
-<div ng-controller="ItemCtrl">
-  <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
-    <h2 class="md-title inset">Items in {{subcategoryName}} </h2>
-    <md-button id='add-button' class="md-fab" aria-label="Add" ng-href="/#/{{categoryName}}/{{subcategoryName}}/add">
-      <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
-    </md-button>
-    <md-button class="md-raised md-primary" ng-href="#/{{back_url}}">
-        <ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> One Level
-    </md-button>
-  </section>
-  <div class='md-padding' layout="row" layout-align="center start" layout-wrap>
-    <md-card ng-repeat="item in items">
-        <img ng-src="{{item.image_url}}" class="md-card-image" alt="image caption" ng-click="showEdit($event, items, item.id, item.value)">
-        <md-card-content>
-          <h2>{{item.value}}</h2>
-        </md-card-content>
-      <md-divider></md-divider>
-      <md-dialog-action layout="row" layout-align="center">
-        <md-button class="md-primary" ng-click="showEdit($event, items, item.id, item.value)">Edit</md-button>
-        <md-button class="md-warn" ng-click="showDelete($event, items, item.id)">Delete</md-button>
-      </md-dialog-action>
-    </md-card>
-  </div>
+<div class="relative" ng-controller="AppCtrl">
+    <md-toolbar class="animate-show md-whiteframe-z1">
+        <div class="md-toolbar-tools">
+      <md-button aria-label="Go Back" class="md-icon-button" ng-href="#/{{back_url}}">
+        <ng-md-icon icon="arrow_back" style="fill: white"></ng-md-icon>
+      </md-button>
+            <h2><a href="#/">Dotr -- dote on those you love</a></h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+                <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <div ng-controller="ItemCtrl">
+        <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
+            <h2 class="md-title inset">Items in {{subcategoryName}} </h2>
+            <md-button id='add-button' class="md-fab" aria-label="Add" ng-href="/#/{{categoryName}}/{{subcategoryName}}/add">
+                <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+            </md-button>
+        </section>
+        <div class='md-padding' layout="row" layout-align="center start" layout-wrap>
+            <md-card ng-repeat="item in items">
+                <img ng-src="{{item.image_url}}" class="md-card-image" alt="image caption" ng-click="showEdit($event, items, item.id, item.value)">
+                <md-card-content>
+                    <h2>{{item.value}}</h2>
+                </md-card-content>
+                <md-divider></md-divider>
+                <md-dialog-action layout="row" layout-align="center">
+                    <md-button class="md-primary" ng-click="showEdit($event, items, item.id, item.value)">Edit</md-button>
+                    <md-button class="md-warn" ng-click="showDelete($event, items, item.id)">Delete</md-button>
+                </md-dialog-action>
+            </md-card>
+        </div>
+    </div>
 </div>
