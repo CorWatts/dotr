@@ -5,10 +5,10 @@
         	<ng-md-icon icon="keyboard_arrow_up" style="fill: white; display: inline-block; margin-bottom: -6px;"></ng-md-icon> Back to {{pretty_type_plural}}
     	</md-button>
   	</section>
-	<form name="addForm" ng-submit="submit(type)">
+	<form name="addForm" ng-submit="submit(type)" autocomplete="false">
 		<md-input-container md-no-float class="md-block">
 			<label>{{pretty_type}} Name</label>
-			<input type="text" ng-model="formData.value" required md-autofocus>
+			<input type="text" ng-model="formData.value" required autofocus autocomplete="false">
 			<div ng-messages="addForm.value.$error">
 				<div ng-message="required">This is required.</div>
 			</div>
