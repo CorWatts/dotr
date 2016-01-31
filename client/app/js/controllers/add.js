@@ -65,7 +65,8 @@ var AddCtrl = function ($scope, $http, $routeParams, $location, _) {
     return {
       type_plural: type_plural,
       parent_plural: parent_plural,
-      back_url: encodeURI(back_url),
+      back_url: back_url,
+      value: decodeURI(value)
     }
 
   };
