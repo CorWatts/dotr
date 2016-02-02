@@ -1,36 +1,4 @@
 var ItemCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
-  $scope.showAdd = function(ev, items, subcategoryId) {
-    subcategoryId = parseInt(subcategoryId);
-
-    $mdDialog.show({
-      controller: function ($scope, $http, $mdDialog, subcategoryId) {
-        $scope.formData = {};
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function(ev2) {
-          ev2.preventDefault();
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
-        $scope.submit = function() {
-          $http.post('api/item/'+subcategoryId, $scope.formData, {headers: {'Content-Type': 'application/json'}}).then(function(response) {
-            items.push(response.data.data);
-          });
-          $mdDialog.hide();
-        };
-      },
-      template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form ng-submit="submit()" name="add"> <h2>Add an Item</h2> <div layout layout-sm="column"> <md-input-container flex> <label>Name</label> <input ng-model="formData.value" md-autofocus> </md-input-container> </form> </md-content> <md-dialog-actions layout="row"> <span flex></span> <md-button ng-click="cancel($event)"> Cancel </md-button> <md-button type="submit" class="md-primary"> Save </md-button> </md-dialog-actions></md-dialog>',
-      locals: {subcategoryId: subcategoryId},
-      targetEvent: ev
-    }) .then(function(answer) {
-      $scope.alert = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.alert = 'You cancelled the dialog.';
-    });
-  };
 
   $scope.showEdit = function(ev, items, id, value) {
     $mdDialog.show({

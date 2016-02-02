@@ -13,48 +13,6 @@ var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
     };
   }
 
-  $scope.showAdd = function(ev, categories) {
-    $mdDialog.show({
-      controller: function ($scope, $http, $mdDialog) {
-        //categoryControllerMethods.call(this)
-        $scope.hide = function() {
-          $mdDialog.hide();
-        };
-        $scope.cancel = function(ev2)  {
-          ev2.preventDefault();
-          $mdDialog.cancel();
-        };
-        $scope.answer = function(answer) {
-          $mdDialog.hide(answer);
-        };
-        $scope.formData = {};
-        $scope.submit = function() {
-          $http.post('api/category', $scope.formData).then(function(response) {
-            categories.push(response.data.data);
-          });
-          $mdDialog.hide();
-        };
-      },
-      template: '<md-dialog aria-label="Form">' +
-									'<md-dialog-content>' +
-                    '<form name="add" ng-submit="submit()">' +
-                      '<h2>Add a Category</h2>' +
-                        '<md-input-container flex>' +
-                          '<label>Name</label>' +
-                          '<input required name="category" ng-model="formData.value" md-autofocus>' +
-          								'<div ng-message="required">This is required.</div>' +
-                        '</md-input-container>' +
-                      '</md-dialog-content>' +
-                      '<md-dialog-actions layout="row">' +
-                        '<md-button ng-click="cancel($event)">Cancel </md-button>' +
-                        '<md-button class="md-primary" type="submit">Save </md-button>' +
-                      '</md-dialog-actions>' +
-                    '</form>' +
-                '</md-dialog>',
-      targetEvent: ev
-    });
-  };
-
   $scope.showEdit = function(ev, categories, id, value) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id, value) {
