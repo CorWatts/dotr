@@ -1,14 +1,14 @@
 var AppCtrl = function($scope, $mdBottomSheet, $mdDialog, $location){
-	// Toolbar search toggle
-	$scope.toggleSearch = function(element) {
-		$scope.showSearch = !$scope.showSearch;
-	};
+  // Toolbar search toggle
+  $scope.toggleSearch = function(element) {
+    $scope.showSearch = !$scope.showSearch;
+  };
 
-	// Bottomsheet & Modal Dialogs
-	$scope.alert = '';
-	$scope.showListBottomSheet = function($event) {
-		$scope.alert = '';
-		$mdBottomSheet.show({
+  // Bottomsheet & Modal Dialogs
+  $scope.alert = '';
+  $scope.showListBottomSheet = function($event) {
+    $scope.alert = '';
+    $mdBottomSheet.show({
       template: 
         '<md-bottom-sheet class="md-list md-has-header">' +
           '<md-list>' +
@@ -20,22 +20,21 @@ var AppCtrl = function($scope, $mdBottomSheet, $mdDialog, $location){
             '</md-list-item> ' +
           '</md-list>' +
         '</md-bottom-sheet>',
-			controller: 'ListBottomSheetCtrl',
-			targetEvent: $event
-		}).then(function(clickedItem) {
-      $location.path(clickedItem.url);
+      controller: 'ListBottomSheetCtrl',
+      targetEvent: $event
     });
-	};
+  };
 };
 
-var ListBottomSheetCtrl = function($scope, $mdBottomSheet) {
-	$scope.items = [
-	{ name: 'About', icon: '', url: 'about'},
-	];
+var ListBottomSheetCtrl = function($scope, $mdBottomSheet, $location) {
+  $scope.items = [
+  { name: 'About', icon: '', url: '/about'},
+  ];
 
-	$scope.listItemClick = function($index) {
-		var clickedItem = $scope.items[$index];
-		$mdBottomSheet.hide(clickedItem);
-	};
+  $scope.listItemClick = function($index) {
+    var clickedItem = $scope.items[$index];
+    $mdBottomSheet.hide(clickedItem);
+    $location.path(clickedItem.url);
+  };
 };
 
