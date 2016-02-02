@@ -16,10 +16,10 @@
     <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
       <h2 class="md-title inset">Add {{type_article}} {{pretty_type}}</h2>
     </section>
-    <form name="addForm" ng-submit="submit(type)" autocomplete="false">
+    <form name="addForm" ng-submit="submit(type)">
       <md-input-container md-no-float class="md-block">
         <label>{{pretty_type}} Name</label>
-        <input type="text" ng-model="formData.value" required autofocus autocomplete="false">
+        <input type="text" ng-model="formData.value" required autofocus autocomplete="off">
         <div ng-messages="addForm.value.$error">
           <div ng-message="required">This is required.</div>
         </div>
