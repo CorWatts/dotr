@@ -1,8 +1,8 @@
 // just for testing: https://jsfiddle.net/5xd1y3e8/
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
+var bluebird = require('bluebird');
 var googleImages = require('google-images');
-//var gi = googleImages('007372715646685475913:rqzmtjdyldw', 'AIzaSyBu0hwI5PVwBO5iMKQL-rbFN_u6j9WVw7g');
 var gi = googleImages(process.env.CES_ID, process.env.API_KEY);
 
 var get_id = function(db, level, value) {
@@ -45,6 +45,21 @@ var delete_from_id = function(db, file, id) {
   });
 };
 
+var gi_search = function(term) {
+  var search_options = {
+    size: 'medium'
+  };
+
+  return gi.search(term, search_options)
+    .then(function(images) {
+      var image_url = "https://i.imgur.com/EJDyDie.jpg";
+      if(images.length !== 0) {
+        image_url = images[0].url;
+      }
+      return image_url;
+    });
+};
+
 var success = function(data) {
 	res.send(200, {
 		"status": "success",
@@ -59,4 +74,5 @@ module.exports = {
   , delete_id: delete_id
   , delete_from_id: delete_from_id
   , gi: gi
+  , gi_search: gi_search
 }

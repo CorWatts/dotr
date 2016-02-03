@@ -3,7 +3,6 @@ var jsonfile = require('jsonfile');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');
-var gi       = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -63,12 +62,8 @@ exports.post = function(req, res, next) {
 	if(existing_category !== undefined)
 		errors.already_exists(res, "category");
 
-  gi.search(value, {size: 'medium'})
-    .then(function(images) {
-      if(images.length !== 0)
-        image_url = images[0].url;
-      else
-        image_url = "https://i.imgur.com/EJDyDie.jpg";
+  helpers.gi_search(value)
+    .then(function(image_url) {
 
       json = {
         "id": id,
@@ -102,26 +97,20 @@ exports.put = function(req, res, next) {
   if(arr_id === undefined)
     errors.does_not_exist(res, "category");
 
-	gi.search(value, {size: 'medium'})
-        .then(function(images) {
-          if(images.length !== 0) {
-            image_url = images[0].url;
-          } else {
-            image_url = "https://i.imgur.com/EJDyDie.jpg";
-          }
+	helpers.gi_search(value)
+    .then(function(image_url) {
+      db[arr_id].value = value;
+      db[arr_id].image_url = image_url;
 
-          db[arr_id].value = value;
-          db[arr_id].image_url = image_url;
+      jsonfile.writeFileSync(file, db, {spaces: 2});
 
-          jsonfile.writeFileSync(file, db, {spaces: 2});
-
-          // Send back the value they posted
-          res.send(200, {
-              "status": "success",
-              "data": db[arr_id]
-          });
-          res.next();
-        });
+      // Send back the value they posted
+      res.send(200, {
+          "status": "success",
+          "data": db[arr_id]
+      });
+      res.next();
+    });
 }
 
 exports.destroy = function(req, res, next) {

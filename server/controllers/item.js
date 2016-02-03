@@ -3,7 +3,6 @@ var jsonfile = require('jsonfile');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');
-var gi       = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -62,12 +61,8 @@ exports.post = function(req, res, next) {
   if(existing_item !== undefined)
     errors.already_exists(res, "item");
 
-  gi.search(value, {size: 'medium'})
-    .then(function(images) {
-      if(images.length !== 0)
-        image_url = images[0].url;
-      else
-        image_url = "https://i.imgur.com/EJDyDie.jpg";
+  helpers.gi_search(value)
+    .then(function(image_url) {
 
       json = {
         "id": id,
@@ -92,6 +87,7 @@ exports.post = function(req, res, next) {
 exports.put = function(req, res, next) {
   value = req.body.value;
   id = req.body.id;
+  console.log('putting');
 
   var arr_id = _.findIndex(db, function(item) {
     return item.id == id;
@@ -100,10 +96,10 @@ exports.put = function(req, res, next) {
   if(arr_id === undefined)
     errors.does_not_exist(res, "item");
 
-  gi.search(value, {size: 'medium'})
-    .then(function(images) {
+  helpers.gi_search(value)
+    .then(function(image_url) {
       db[arr_id].value = value;
-      db[arr_id].image_url = images[0].url;
+      db[arr_id].image_url = image_url;
 
 
       jsonfile.writeFileSync(file, db, {spaces: 2});
