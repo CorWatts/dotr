@@ -3,7 +3,7 @@ var jsonfile = require('jsonfile');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');
-var gi          = helpers.gi;
+var gi       = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -62,12 +62,17 @@ exports.post = function(req, res, next) {
 
   gi.search(value, {size: 'medium'})
     .then(function(images) {
+      if(images.length !== 0)
+        image_url = images[0].url;
+      else
+        image_url = "https://i.imgur.com/EJDyDie.jpg";
+
       json = {
         "id": id,
         "parent": category.id,
         "type": "subcategory",
         "value": value,
-        "image_url": images[0].url
+        "image_url": image_url
       }
       db.push(json);
 

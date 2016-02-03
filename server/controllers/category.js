@@ -1,9 +1,9 @@
-var _           = require('lodash');
-var jsonfile    = require('jsonfile');
-var errors      = require('../lib/errors');
-var helpers     = require('../lib/helpers');
-var config      = require('../config/config');
-var gi          = helpers.gi;
+var _        = require('lodash');
+var jsonfile = require('jsonfile');
+var errors   = require('../lib/errors');
+var helpers  = require('../lib/helpers');
+var config   = require('../config/config');
+var gi       = helpers.gi;
 
 var db   = config.db;
 var file = config.file;

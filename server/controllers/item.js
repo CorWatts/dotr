@@ -3,7 +3,7 @@ var jsonfile = require('jsonfile');
 var errors   = require('../lib/errors');
 var helpers  = require('../lib/helpers');
 var config   = require('../config/config');
-var gi          = helpers.gi;
+var gi       = helpers.gi;
 
 var db   = config.db;
 var file = config.file;
@@ -18,6 +18,9 @@ exports.list = function(req, res, next) {
     if(!_.has(criteria, "parent"))
       criteria.parent = helpers.get_id(db, "subcategory", parent_name);
   }
+
+  if(_.has(req.params, "value"))
+    criteria.value = req.params.value;
 
   criteria = _.merge(criteria, {type: "item"});
 
