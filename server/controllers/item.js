@@ -31,6 +31,7 @@ exports.list = function(req, res, next) {
     "parent_id": criteria.parent,
     "data": items
   });
+  res.next();
 }
 
 exports.get = function(req, res, next) {
@@ -44,6 +45,7 @@ exports.get = function(req, res, next) {
     "status": "success",
     "data": item
   });
+  res.next();
 }
 
 exports.post = function(req, res, next) {
@@ -83,6 +85,7 @@ exports.post = function(req, res, next) {
         "response": "success",
         "data": json
       });
+      res.next();
     });
 }
 
@@ -110,6 +113,7 @@ exports.put = function(req, res, next) {
         "status": "success",
         "data": db[arr_id]
       });
+      res.next();
     });
 }
 
@@ -127,5 +131,6 @@ exports.destroy = function(req, res, next) {
   res.send(200, {
     "response": "success"
   });
+  res.next();
 };
 

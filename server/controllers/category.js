@@ -23,6 +23,7 @@ exports.list = function(req, res, next) {
     "status": "success",
     "data": categories
   });
+  res.next();
 }
 
 exports.get = function(req, res, next) {
@@ -36,6 +37,7 @@ exports.get = function(req, res, next) {
     "status": "success",
     "data": category
   });
+  res.next();
 }
 
 exports.sub = function(req, res, next) {
@@ -49,6 +51,7 @@ exports.sub = function(req, res, next) {
     "status": "success",
     "data": subcategories
   });
+  res.next();
 }
 
 exports.post = function(req, res, next) {
@@ -84,6 +87,7 @@ exports.post = function(req, res, next) {
         "status": "success",
         "data": json
       });
+      res.next();
     });
 }
 
@@ -100,21 +104,23 @@ exports.put = function(req, res, next) {
 
 	gi.search(value, {size: 'medium'})
         .then(function(images) {
-          if(images.length !== 0)
+          if(images.length !== 0) {
             image_url = images[0].url;
-          else
+          } else {
             image_url = "https://i.imgur.com/EJDyDie.jpg";
+          }
 
-            db[arr_id].value = value;
-            db[arr_id].image_url = image_url;
+          db[arr_id].value = value;
+          db[arr_id].image_url = image_url;
 
-            jsonfile.writeFileSync(file, db, {spaces: 2});
+          jsonfile.writeFileSync(file, db, {spaces: 2});
 
-            // Send back the value they posted
-            res.send(200, {
-                "status": "success",
-                "data": db[arr_id]
-            });
+          // Send back the value they posted
+          res.send(200, {
+              "status": "success",
+              "data": db[arr_id]
+          });
+          res.next();
         });
 }
 
@@ -132,4 +138,5 @@ exports.destroy = function(req, res, next) {
   res.send(200, {
     "response": "success"
   });
+  res.next();
 }
