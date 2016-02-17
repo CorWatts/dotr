@@ -6,6 +6,7 @@
   "main": "server.js",
   "dependencies": {
     "bluebird": "^3.2.1",
+    "bunyan": "^1.6.0",
     "google-images": "^1.0.0",
     "jsonfile": "^2.2.3",
     "lodash": "^3.10.1",

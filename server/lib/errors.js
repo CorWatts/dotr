@@ -6,7 +6,7 @@ var already_exists = function(res, type) {
 }
 
 var does_not_exist = function(res, type) {
-  res.send(400, {
+  res.send(404, {
     response: "error",
     message: "The specified "+type+" does not exist."
   });

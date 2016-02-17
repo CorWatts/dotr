@@ -1,7 +1,6 @@
 // just for testing: https://jsfiddle.net/5xd1y3e8/
 var _        = require('lodash');
 var jsonfile = require('jsonfile');
-var bluebird = require('bluebird');
 var googleImages = require('google-images');
 var gi = googleImages(process.env.CES_ID, process.env.API_KEY);
 

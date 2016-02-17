@@ -1,13 +1,19 @@
 var restify  = require('restify');
+var Logger = require('bunyan');
 
-var server = restify.createServer();
+var log = new Logger({name: 'dotr'});
+var server = restify.createServer({
+  name: "dotr",
+  log: log
+});
+
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.pre(restify.pre.sanitizePath());
 
 server.listen(8080, function() {
-    console.log('%s listening at %s', server.name, server.url);
+    log.info({addr: server.address()}, 'listening');
 });
 
 module.exports.restify = restify;
