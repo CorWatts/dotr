@@ -1,5 +1,6 @@
 var app = angular.module('dotrApp', ['ngMaterial', 'ngMdIcons', 'ngRoute'])
-  .constant('_', window._);
+  .constant('_', window._)
+  .value('isHome', false);
 
 app.config(function($mdThemingProvider) {
   var customBlueMap = 		$mdThemingProvider.extendPalette('light-blue', {
@@ -38,7 +39,7 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       templateUrl: '../partials/category-list.html',
-      controller: 'CategoryCtrl'
+      controller: 'CategoryCtrl',
     }).
     when('/about', {
       templateUrl: '../partials/about.html',

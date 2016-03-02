@@ -1,4 +1,4 @@
-<html lang="en" ng-app="dotrApp">
+<html lang="en">
 	<head>
 		<title>Dotr</title>
 
@@ -26,6 +26,7 @@
   	<script src="js/controllers/item.js"></script>
   	<script src="js/controllers/add.js"></script>
   	<script src="js/controllers.js"></script>
+  	<script src="js/directives.js"></script>
   	<!--<script src="js/animations.js"></script>
   	<script src="js/filters.js"></script>
     <script src="js/services.js"></script>-->
@@ -39,7 +40,24 @@
 			}
 		</style>
 	</head>
-<body layout="row">
-  <div ng-view layout-fill role="main" ></div>
+<body ng-app="dotrApp" layout="row" ng-controller="AppCtrl" ng-cloak>
+  <div layout-fill class="relative">
+
+    <md-toolbar class="animate-show md-whiteframe-z1">
+      <div class="md-toolbar-tools">
+        <md-button aria-label="Go Back" ng-hide="isHome()" class="ng-hide md-icon-button" back-button>
+          <ng-md-icon icon="arrow_back" style="fill: white"></ng-md-icon>
+        </md-button>
+        <h2><a href="#/">Dotr -- dote on those you love</a></h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Open Settings" ng-click="showListBottomSheet($event)">
+          <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <div ng-view role="main"><div>
+
+      </div>
 </body>
 </html>

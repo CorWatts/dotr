@@ -1,4 +1,12 @@
 var AppCtrl = function($scope, $mdBottomSheet, $mdDialog, $location){
+
+  $scope.isHome = function() {
+    if($location.path() === "/")
+      return true;
+
+    return false;
+  };
+
   // Toolbar search toggle
   $scope.toggleSearch = function(element) {
     $scope.showSearch = !$scope.showSearch;

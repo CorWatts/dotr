@@ -1,5 +1,7 @@
 var ItemCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
 
+  $scope.isHome = false;
+
   $scope.showEdit = function(ev, items, id, value) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id, value) {
