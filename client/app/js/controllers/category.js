@@ -1,5 +1,7 @@
 var CategoryCtrl = function ($scope, $http, $mdDialog, _) {
 
+  $scope.isHome = true;
+
   var categoryControllerMethods = function() {
     $scope.hide = function() {
       $mdDialog.hide();

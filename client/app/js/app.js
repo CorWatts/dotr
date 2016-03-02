@@ -38,7 +38,8 @@ app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       templateUrl: '../partials/category-list.html',
-      controller: 'CategoryCtrl'
+      controller: 'CategoryCtrl',
+      isHome: true
     }).
     when('/about', {
       templateUrl: '../partials/about.html',

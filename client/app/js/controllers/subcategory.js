@@ -1,4 +1,7 @@
 var SubcategoryCtrl = function ($scope, $http, $mdDialog, $routeParams, _) {
+
+  $scope.isHome = false;
+
   $scope.showEdit = function(ev, subcategories, id, value) {
     $mdDialog.show({
       controller: function ($scope, $http, $mdDialog, id, value) {
