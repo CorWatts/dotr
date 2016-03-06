@@ -1,9 +1,11 @@
 <div class="relative ng-scope" ng-controller="CategoryCtrl">
   <section layout="row" layout-xs="column" layout-align="start center" layout-wrap>
     <h2 class="md-title inset">Categories</h2>
-    <md-button id='add-button' class="md-fab" aria-label="Add" href="/#/add">
-      <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+
+    <md-button id="add-button" class="md-fab md-fab-bottom-right" aria-label="Add" href="/#/add">
+      <ng-md-icon icon="add"></ng-md-icon>
     </md-button>
+
   </section>
   <div class='md-padding' layout="row" layout-align="center start" layout-wrap>
     <md-card ng-repeat="category in categories">

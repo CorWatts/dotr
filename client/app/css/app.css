@@ -82,7 +82,12 @@ button > md-icon {
   margin: 0px auto 0px auto;
 }
 
-.md-fab ng-md-icon svg {
+#add-button {
+  position: fixed;
+}
+
+#add-button ng-md-icon svg {
+  fill: white;
   margin-top: 16px;
 }
 
