@@ -17,7 +17,7 @@ Replace variables in start.sh with your google custom search tokens
 #### Pressing needs
 General refactoring and improvements:
 * get rid of modals for editing
-* improve mobile experience with floating action button
+* ~~improve mobile experience with floating action button~~
 * ~~add "About" page~~
 * add more item functionality:
   * a user should be able to input a link of an item they are considering. It should be easily clickable.
